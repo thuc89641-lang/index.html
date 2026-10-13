@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/flowers.png" type="image/x-icon">
+    <title>foryou</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+        @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+        body {
+            font-family: 'Indie Flower', cursive !important;
+            background: #f092be;
+            /*CAPE HONEY*/
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: transparent;
+        }
+
+        h4 {
+            font-size: 30px;
+            line-height: 1px;
+            font-family: 'Amatic SC', cursive !important;
+        }
+
+        .color1 {
+            color: #ff6c47
+        }
+
+        /*MOUNTAIN MEADOW*/
+        .color2 {
+            color: #16aadb
+                /*TALL POPPY*/
+        }
+
+        .card {
+            color: #013243;
+            /*SHERPA BLUE*/     
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 400px;
+            background: #e0e1dc;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) perspective(2000px);
+            box-shadow: inset 400px 0 50px rgba(0, 0, 0, .5), 20px 0 60px rgba(0, 0, 0, .5);
+            transition: 2s;
+            z-index: 10;
+        }
+
+        .card:hover {
+            transform: translate(-50%, -50%) perspective(2000px) rotate(15deg) scale(1.2);
+            box-shadow: inset 20px 0 50px rgba(0, 0, 0, .5), 0 10px 100px rgba(0, 0, 0, .5);
+        }
+
+        .card:before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #BAC1BA;
+            transform-origin: bottom;
+            transform: skewX(-45deg);
+        }
+
+        .card:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -5px;
+            width: 5px;
+            height: 100%;
+            background: #92A29C;
+            transform-origin: left;
+            transform: skewY(-45deg);
+        }
+
+        .card .imgBox {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-origin: left;
+            transition: .7s;
+            cursor: pointer; /* Add pointer to show it's clickable */
+        }
+
+        .card .bark {
+            position: absolute;
+            background: #e0e1dc;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: .7s;
+        }
+
+        .card .imgBox img {
+            min-width: 250px;
+            max-height: 400px;
+        }
+
+        .card:hover .imgBox {
+            transform: rotateY(-135deg);
+        }
+
+        .card:hover .bark {
+            opacity: 1;
+            transition: .6s;
+            box-shadow: 300px 200px 100px rgba(0, 0, 0, .4) inset;
+        }
+
+        .card .details {
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            padding: 0 0 0 10px;
+            z-index: -1;
+            margin-top: 40px;
+        }
+
+        .card .details p {
+            font-size: 15px;
+            line-height: 5px;
+            transform: rotate(-10deg);
+            padding: 0 0 0 20px;
+        }
+
+        .card .details h4 {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* Firework Canvas */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Allows clicks to pass through to the card */
+            z-index: 9999;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.prinsh.com/NathanPrinsley-textstyle/nprinsh-stext.css" />
+</head>
+
+<body>
+    <!-- Firework Overlay -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <div class="card">
+        <div class="imgBox" id="coverImage">
+            <div class="bark"></div>
+            <img src="https://assets.cardly.net/production/artwork/8/9/8/898e1f13-0dfa-6d62-664e-070005c2f046/detail/cute-happy-birthday-dog-p1-r2.webp"
+                width="100%" height="100%">
+        </div>
+        <div class="details">
+            <h4 class="color1">Happy Birthday</h4>
+            <h4 class="color2 margin">NA MẮM HÚI</h4>
+            <p>       Lê Thị ... Vân 18/10/2003 🎂💕     </p>
+            <p>chúc mừng sinh nhật của em</p>
+            <p>Mong nụ cười của em luôn nở trên đôi môi</p>
+            <p>Ánh mắt của em luôn có sự hạnh phúc</p>
+            <p>Sự nỗ lực em bỏ ra là sự thành công</p>
+            <p>Mọi công việc đều thuận lợi theo ý em</p>
+            <p>Luôn luôn xinh đẹp</p>
+            <p>Và đừng quên sức khỏe của mình nhé</p>
+            <p>    FIGHTTING    </p>
+            <p>Chúc em sinh nhật vui vẻ và thật hạnh phúc</p>
+            <p>❤️❤️❤️</p>
+            
+            <p class="text-right">-Eddie</p>
+            <p class="text-right"></p>
+
+            <audio id="bgMusic" loop>
+                <source src="sinhnhat.mp3" type="audio/mpeg">
+            </audio>
+
+        </div>
+    </div>
+
+    <script>
+        // 1. Logic bật nhạc khi click vào ảnh bìa
+        const coverImage = document.getElementById('coverImage');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        coverImage.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => console.log("Không thể phát nhạc: ", e));
+            }
+        });
+
+        // 2. Logic pháo hoa khi chạm/click vào màn hình
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.radius = Math.random() * 2.5 + 1;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 6 + 2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.05; // Trọng lực nhẹ
+                this.alpha -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createFirework(x, y) {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff', '#ff9900'];
+            for (let i = 0; i < 60; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.update();
+                p.draw();
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Lắng nghe sự kiện click chuột
+        window.addEventListener('click', (e) => {
+            createFirework(e.clientX, e.clientY);
+        });
+
+        // Lắng nghe sự kiện chạm trên màn hình cảm ứng
+        window.addEventListener('touchstart', (e) => {
+            const touches = e.changedTouches;
+            for(let i = 0; i < touches.length; i++) {
+                createFirework(touches[i].clientX, touches[i].clientY);
+            }
+        });
+    </script>
+</body>
+
+</html>
